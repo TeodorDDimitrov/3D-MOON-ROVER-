@@ -21,8 +21,8 @@ void onDisconnectedGamepad(GamepadPtr gp) {
 }
 
 void setup() {
-  Serial.begin(115200);   // For USB debugging
-  Serial2.begin(115200);  // For communication with Mega (TX2=GPIO17)
+  Serial.begin(115200);
+  Serial2.begin(115200);
   delay(500);
 
   Serial.println("4x4 ROVER - PS5 Control");
@@ -80,28 +80,28 @@ void loop() {
       currentDpadCmd = "";
     }
 
-    // Send LEFT motor commands (only on change)
+    // Send LEFT motor commands
     if (currentLeftCmd != lastLeftCmd) {
-      Serial2.println(currentLeftCmd);  // Send to Mega
+      Serial2.println(currentLeftCmd); 
       Serial.print("LEFT: ");
-      Serial.println(currentLeftCmd);  // Debug on USB
+      Serial.println(currentLeftCmd);
       lastLeftCmd = currentLeftCmd;
     }
 
-    // Send RIGHT motor commands (only on change)
+    // Send RIGHT motor commands
     if (currentRightCmd != lastRightCmd) {
-      Serial2.println(currentRightCmd);  // Send to Mega
+      Serial2.println(currentRightCmd); // Send to Mega
       Serial.print("RIGHT: ");
-      Serial.println(currentRightCmd);  // Debug on USB
+      Serial.println(currentRightCmd);
       lastRightCmd = currentRightCmd;
     }
 
-    // Send D-PAD servo commands (only on change)
+    // Send D-PAD servo commands
     if (currentDpadCmd != lastDpadCmd) {
       if (currentDpadCmd != "") {
         Serial2.println(currentDpadCmd);  // Send to Mega
         Serial.print("SERVO: ");
-        Serial.println(currentDpadCmd);  // Debug on USB
+        Serial.println(currentDpadCmd);
       }
       lastDpadCmd = currentDpadCmd;
     }

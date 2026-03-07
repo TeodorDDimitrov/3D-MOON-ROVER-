@@ -161,7 +161,7 @@ void savePositionsToEEPROM() {
 }
 
 void setup() {
-  wdt_enable(WDTO_2S); // Enable 2 second watchdog timer
+  wdt_enable(WDTO_2S);
   
   Serial.begin(115200);
   Serial1.begin(115200);
@@ -199,11 +199,11 @@ void setup() {
   
   Serial.println("Mega Ready - Waiting for commands...");
   
-  wdt_reset(); // Reset watchdog after setup
+  wdt_reset();
 }
 
 void loop() {
-  wdt_reset(); // Reset watchdog at start of each loop
+  wdt_reset();
   
   // Save positions to EEPROM every 30 seconds if changed
   if (positionsChanged && (millis() - lastSave > 30000)) {
@@ -214,8 +214,7 @@ void loop() {
     char command[10];
     int len = Serial1.readBytesUntil('\n', command, sizeof(command) - 1);
     command[len] = '\0';
-    
-    // Trim trailing whitespace/carriage returns
+  
     while (len > 0 && (command[len-1] == '\r' || command[len-1] == ' ' || command[len-1] == '\n')) {
       command[--len] = '\0';
     }
