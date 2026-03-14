@@ -175,6 +175,14 @@ bool initCamera() {
     Serial.printf("Camera init failed: 0x%x\n", err);
     return false;
   }
+
+  // Rotate image 180° by enabling both vertical flip and horizontal mirror
+  sensor_t *s = esp_camera_sensor_get();
+  if (s) {
+    s->set_vflip(s, 1);   // flip vertically
+    s->set_hmirror(s, 1); // flip horizontally
+  }
+
   return true;
 }
 
